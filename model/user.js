@@ -1,5 +1,5 @@
 
-const db = require('../util/database');
+const db = require('../db/database');
 
 
 module.exports = class User{
@@ -38,10 +38,16 @@ module.exports = class User{
          return data;
     }
 
-    static findById(id, cb)
+    static findById(id)
     {
         // find data from database by conditions
         return db.execute('SELECT * FROM user WHERE user.uid = ?', [id]);
+    }
+
+    static findByName(username)
+    {
+        // find data from database by conditions
+        return db.execute('SELECT * FROM user WHERE user.username = ?', [username]);
     }
 
     static deleteById(id)

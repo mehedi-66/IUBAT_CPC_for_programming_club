@@ -15,7 +15,7 @@
     <div class="mx-auto">
         <nav
           class="navbar navbar-expand-lg navbar-light bg-light pl-2 pr-2"
-          style="background-color: #e3f2fd"
+          style="background-color: #e3f2fd; height: 60px;"
         >
           <a class="navbar-brand text-primary" href="#">IUBAT_CPC</a>
           <button
@@ -67,8 +67,14 @@
               
             </ul>
             <span>
-                <a class="text-secondary" href="/register">Reg</a>
-                <a class="text-secondary" href="/login">Login</a>
+              <% if(isAuth){%>
+                <a class="text-secondary mt-2" href="/profile">profile</a>
+               <a class=" m-3 btn btn-primary" href="/logout">Logout</a>
+              <%}else{%>
+                <a class="text-secondary mr-4" href="/register">Reg</a>
+               <a class="text-secondary mt-4" href="/login">Login</a>
+              <%}%>
+             
             </span>
              
           </div>
@@ -79,19 +85,23 @@
         
             <div class="card">
                 <h5 class="card-header">Login</h5>
+                <% if(exist == "YES"){%>
+
+                  <p class="text-danger ml-5">User or Password Not Match</p>
+                <%}%>
                 <div class="card-body">
-                    <form>
+                    <form action="/login" method="post"> 
                         <div class="form-group">
                           <label for="username">Username</label>
-                          <input type="text" class="form-control" id="username" name="name" placeholder="username">
+                          <input type="text" class="form-control" id="username" name="name" placeholder="username" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
                           </div>
                         
                         <input type="submit" class="btn btn-primary" value="Submit" />
-                        <a class="ml-3" href="/register">Do register</a>
+                        <a class="ml-3" href="/register">Register</a>
                       </form>
                 </div>
               </div>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
    
 
     <link   rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
@@ -18,7 +18,7 @@
     <div class="mx-auto">
         <nav
           class="navbar navbar-expand-lg navbar-light bg-light pl-2 pr-2"
-          style="background-color: #e3f2fd"
+          style="background-color: #e3f2fd;"
         >
           <a class="navbar-brand text-primary" href="#">IUBAT_CPC</a>
           <button
@@ -70,8 +70,14 @@
               
             </ul>
             <span>
-              <a class="text-secondary" href="#">Reg</a>
-              <a class="text-secondary" href="#">Login</a>
+              <% if(isAuth){%>
+                <a class="text-secondary mt-2" href="/profile">profile</a>
+               <a class=" m-3 btn btn-primary" href="/logout">Logout</a>
+              <%}else{%>
+                <a class="text-secondary mr-4" href="/register">Reg</a>
+               <a class="text-secondary mt-4" href="/login">Login</a>
+              <%}%>
+             
             </span>
              
           </div>

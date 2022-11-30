@@ -81,29 +81,8 @@
       </div>
 
      <div class="container mt-4" style="width: 500px;">
-        
-            <div class="card">
-                <h5 class="card-header">Register</h5>
-                <% if(exist == "YES"){%>
-                  <p class="text-danger ml-5">This username already taken</p>
-                <%}%>
-                <div class="card-body">
-                    <form action="/register" method="post">
-                        <div class="form-group">
-                          <label for="username">Username</label>
-                          <input type="text" class="form-control" id="username" name="name" value="<%= username %>" placeholder="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input  type="password" class="form-control" id="password" name="password" placeholder="password" required>
-                          </div>
-                        
-                        <input type="submit" class="btn btn-primary" value="Submit" />
-                        <a class="ml-3" href="/login">Login</a>
-                      </form>
-                </div>
-              </div>
-         
+            <h4>User Profile Page</h4>
+           <h3>Name : <%= data.username %></h3>
      </div>
        
    

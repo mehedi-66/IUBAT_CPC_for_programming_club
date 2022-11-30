@@ -1,5 +1,5 @@
 
-const db = require('../util/database');
+const db = require('../db/database');
 
 
 module.exports = class Problem{

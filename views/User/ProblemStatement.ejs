@@ -12,7 +12,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
 
     <style>
       .editor {
@@ -71,8 +71,14 @@
             </li>
           </ul>
           <span>
-            <a class="text-secondary" href="#">Reg</a>
-            <a class="text-secondary" href="#">Login</a>
+            <% if(isAuth){%>
+              <a class="text-secondary mt-2" href="/profile">profile</a>
+             <a class=" m-3 btn btn-primary" href="/logout">Logout</a>
+            <%}else{%>
+              <a class="text-secondary mr-4" href="/register">Reg</a>
+             <a class="text-secondary mt-4" href="/login">Login</a>
+            <%}%>
+           
           </span>
         </div>
       </nav>
@@ -80,7 +86,7 @@
 
     <div>
       <nav
-        class="navbar navbar-expand-lg navbar-light bg-light"
+        class="navbar navbar-expand-lg navbar-light bg-light border-top"
         style="background-color: #98b3ff"
       >
         <div

@@ -6,16 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
-  
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
     "compilex": "^0.7.4",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
+    "node-sessionstorage": "^1.0.0",
     "nodemon": "^2.0.20"
   }
 }

@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 
+const sessionInt = require('./db/AuthSession');
 
 const app = express();
 
@@ -19,18 +20,25 @@ app.use('/static',express.static(__dirname + '/static'));  // public static file
 // User Side
 const problem = require('./controller/problem/problem'); 
 const home = require('./controller/home/home'); 
+const member = require('./controller/member/member');
+const user = require('./controller/user/user');
+
+// Auth session initialized
 
 // Admin Side
 const admin = require('./controller/admin/admin'); 
 const adminProblem = require('./controller/problem/adminProblem');
-const user = require('./controller/user/user');
 
 
 
+
+// Auth session initialized
+app.use(sessionInt());
 
 // route folder route located here
 
 app.use(user);
+app.use(member);
 app.use(problem);
 app.use(admin);
 app.use(adminProblem);

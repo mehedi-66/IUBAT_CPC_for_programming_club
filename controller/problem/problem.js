@@ -7,21 +7,20 @@ const User = require("../../model/user");
 const JoinQuery = require("../../model/JoinQuery");
 const Submission = require("../../model/submission");
 const { Router } = require("express");
+const isAuth = require('../Auth/auth');
 
 const route = express.Router();
 
 let option = { stats: true };
 compiler.init(option);
 
-// from session data get user ID
-const uid = 1;
 
 // problem list show
 
-route.use("/problem", (req, res, next) => {
+route.use("/problem", isAuth, (req, res, next) => {
   // fetch all the problem and show them on the page
 
-  JoinQuery.getLeftJoinProblemAndSubmission(uid)
+  JoinQuery.getLeftJoinProblemAndSubmission(req.session.userID)
     .then(([data, fieldData]) => {
       // console.log(data);
 
@@ -31,6 +30,7 @@ route.use("/problem", (req, res, next) => {
         data: data,
         Link: "/problemStatment/",
         notYet: "Not Solve",
+        isAuth: req.session.isAuth,
       });
     })
     .catch((err) => {
@@ -59,6 +59,7 @@ route.get("/problemStatment/:id", (req, res, next) => {
         code: "",
         input: "",
         output: "write code",
+        isAuth: req.session.isAuth,
       });
     })
     .catch((err) => {
@@ -68,7 +69,7 @@ route.get("/problemStatment/:id", (req, res, next) => {
 
 // Compile Code and execute and send data
 
-route.post("/compilercode", (req, res) => {
+route.post("/compilercode",isAuth, (req, res) => {
   let pid = req.body.pid;
   let code = req.body.code;
   let input = req.body.input;
@@ -91,7 +92,7 @@ route.post("/compilercode", (req, res) => {
         };
         compiler.compileCPPWithInput(envData, code, input, (data) => {
           if (data.error) {
-            // res.send(data.error);
+            //return res.send(data.error);
             showOutput(data.error);
           } else {
             // res.send(data.output);
@@ -106,7 +107,7 @@ route.post("/compilercode", (req, res) => {
         };
         compiler.compileCPP(envData, code, (data) => {
           if (data.error) {
-            // res.send(data.error);
+           // res.send(data.error);
             showOutput(data.error);
           } else {
             // res.send(data.output);
@@ -121,7 +122,7 @@ route.post("/compilercode", (req, res) => {
         Problem.findById(pid)
           .then(([probData]) => {
             const page = `./User/ProblemStatement.ejs`;
-            res.render(page, {
+            return res.render(page, {
               title: "Problem Statement Showing",
               problem: probData[0],
               outputArea: "on",
@@ -129,6 +130,7 @@ route.post("/compilercode", (req, res) => {
               code: code,
               input: input,
               output: outputResult,
+              isAuth: req.session.isAuth,
             });
           })
           .catch((err) => {
@@ -163,8 +165,8 @@ route.post("/compilercode", (req, res) => {
         if (inputData === "") {
           compiler.compileCPP(envData, code, (data) => {
             if (data.error) {
-              res.send(data.error);
-              //showOutput(data.error);
+           //  return res.send(data.error);
+             outputDataShow(data.error);
             } else {
               // res.send(data.output);
 
@@ -174,9 +176,11 @@ route.post("/compilercode", (req, res) => {
         } else {
           compiler.compileCPPWithInput(envData, code, inputData, (data) => {
             if (data.error) {
-              res.send(data.error);
+              // Redirect with with error
+             return res.send(data.error);
               //showOutput(data.error);
             } else {
+
               outputDataShow(data);
             }
           });
@@ -192,7 +196,7 @@ route.post("/compilercode", (req, res) => {
 
         fs.readFile(path, "utf8", function (err, data1) {
           if (err) throw err;
-          console.log(typeof data1 + " " + typeof data.output);
+         // console.log(typeof data1 + " " + typeof data.output);
           if (data1.trim() === data.output.trim()) {
             // Accepted Result
             console.log("Accepted");
@@ -214,7 +218,7 @@ route.post("/compilercode", (req, res) => {
         // get information from database
         // some validation logic check
 
-        Submission.findByProblemIdAndSubmissionId(pid, uid)
+        Submission.findByProblemIdAndSubmissionId(pid, req.session.userID)
           .then(([data, status]) => {
             saveSubmission(data);
           })
@@ -271,7 +275,7 @@ route.post("/compilercode", (req, res) => {
 
         function updateSubmissionData() {
           const submission = new Submission(
-            uid,
+            req.session.userID,
             pid,
             statusVardict,
             code,
@@ -280,7 +284,7 @@ route.post("/compilercode", (req, res) => {
           );
 
           submission
-            .update(uid, pid)
+            .update(req.session.userID, pid)
             .then(([data, status]) => {
               // user info update
               updateUserInfo();
@@ -292,7 +296,7 @@ route.post("/compilercode", (req, res) => {
 
         function insertIntoSubmissionData() {
           const submission = new Submission(
-            uid,
+            req.session.userID,
             pid,
             statusVardict,
             code,
@@ -312,7 +316,7 @@ route.post("/compilercode", (req, res) => {
         // Update User inof Success Fully
         function updateUserInfo() {
 
-          User.findById(uid)
+          User.findById(req.session.userID)
             .then(([data, status]) => {
 
               data = data[0];
@@ -342,18 +346,17 @@ route.post("/compilercode", (req, res) => {
 
               const user = new User(null,data.username, data.password, acCnt, data.cntpoint ,waCnt);
               user
-              .update(uid)
+              .update(req.session.userID)
               .then(() => {
 
-                console.log("User data saved successfully");
+               // console.log("User data saved successfully");
                 res.send("HO Gia Check");
+                res.redirect(`/submission/${pid}`);
 
               })
               .catch(err =>{
                 console.log(err);
               });
-
-
 
            
             })
@@ -367,7 +370,7 @@ route.post("/compilercode", (req, res) => {
 });
 
 // Solution Page
-route.get("/solution/:id", (req, res, next) => {
+route.get("/solution/:id",isAuth, (req, res, next) => {
   console.log("Request Id:", req.params.id);
 
   let id = req.params.id;
@@ -383,6 +386,7 @@ route.get("/solution/:id", (req, res, next) => {
       res.render(page, {
         title: "Problem Solution",
         problem: probData[0],
+        isAuth: req.session.isAuth,
       });
     })
     .catch((err) => {
@@ -391,14 +395,14 @@ route.get("/solution/:id", (req, res, next) => {
 });
 
 // Solution Page
-route.get("/submission/:id", (req, res, next) => {
+route.get("/submission/:id",isAuth, (req, res, next) => {
   let id = req.params.id;
 
   //TODO: we need user ID   to get user Data from DB  Last submited Code
 
   // fetch problem based on the number
 
-  JoinQuery.getInnerJoinProblemAndSubmission(id, uid)
+  JoinQuery.getInnerJoinProblemAndSubmission(id, req.session.userID)
     .then(([probData]) => {
       console.log(probData);
       const page = `./User/submit.ejs`;
@@ -416,6 +420,8 @@ route.get("/submission/:id", (req, res, next) => {
         Link: "/problemStatment/",
         solve: solve,
         pid : id,
+        isAuth: req.session.isAuth,
+
       });
 
     })
