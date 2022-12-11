@@ -45,8 +45,8 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/achivements"
-                  >Achivements</a
+                <a class="nav-link" href="/activites"
+                  >Activites</a
                 >
               </li>
               <li class="nav-item">
@@ -113,7 +113,7 @@
              <td>
               <% if(item.difficulties === 'Easy'){ %>
                  <P class="text-success"><%=item.difficulties %></P>
-               <%}else if(item.difficulties === 'Worng'){%>
+               <%}else if(item.difficulties === 'Wrong'){%>
             
                  <P class="text-warning"><%= item.difficulties %></P>
                <%} else {%>
@@ -125,7 +125,7 @@
              <td>
                <% if(item.status === 'Accepted'){ %>
                   <P class="text-success"><%=item.status %></P>
-                <%}else if(item.status === 'Worng'){%>
+                <%}else if(item.status === 'Wrong'){%>
              
                   <P class="text-danger"><%= item.status %></P>
                 <%} else{%>

@@ -206,7 +206,7 @@ route.post("/compilercode",isAuth, (req, res) => {
             saveDataIntoDatabase();
           } else {
             // Store the Worng Result
-            statusVardict = "Worng";
+            statusVardict = "Wrong";
 
             saveDataIntoDatabase();
           }
@@ -350,7 +350,7 @@ route.post("/compilercode",isAuth, (req, res) => {
               .then(() => {
 
                // console.log("User data saved successfully");
-                res.send("HO Gia Check");
+              //  res.send("HO Gia Check");
                 res.redirect(`/submission/${pid}`);
 
               })
