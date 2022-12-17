@@ -99,55 +99,28 @@
                 <div class="topblogs ">
                     <h2 class="text-primary pt-4 pb-4">Executive Members</h2>
                     <div class="row g-4">
-                        <div class="col-md-12 col-lg-6 d-flex">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img width="177px" height="117px" src="images/senior.jpg" alt="">
-                                </div>
-                                <div class="col-md-4 ">
-    
-                                    <h4>Mehedi
-                                    </h4>
-                                    <p>programming</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img width="177px" height="117px" src="images/senior.jpg" alt="">
-                                </div>
-                                <div class="col-md-4">
-                                    <h4>Good Boy
-                                    </h4>
-                                    <p>Programming </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img width="177px" height="117px" src="images/senior.jpg" alt="">
-                                </div>
-                                <div class="col-md-4">
-                                    <h4>Hasan
-                                    </h4>
-                                    <p>Programming</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6 d-flex">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img width="177px" height="117px" src="images/senior.jpg" alt="">
-                                </div>
-                                <div class="col-md-4">
-                                    <h4>Hasan
-                                    </h4>
-                                    <p>programming</p>
-                                </div>
-                            </div>
-                        </div>
+                       
+                      <% data.forEach(function(item){ %>
+                        <% if(item.position == "Executive"){%>
+                        <div class="mt-2 col-md-12 col-lg-6 d-flex">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <img width="177px" height="117px" src="/<%= item.image%>" alt="">
+                              </div>
+                              <div class="col-md-4 ">
+  
+                                  <p><b> <%= item.name%></b></p>
+                                  <p><%= item.email%></p>
+                              </div>
+                           </div>
+                       </div>
+                       <%}%>
+                
+                        <% })%>
+
+
+                       
+                      
                     </div>
                 </div>
     
@@ -155,30 +128,16 @@
                 <div class="pb-3 ps-3">
                     <h2 class="text-primary pt-4 pb-4">General Members</h2>
                     <div class="row gy-4">
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
+                      <% data.forEach(function(item){ %>
+                        <% if(item.position == "General"){%>
+                          <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
+                            <img width="56" src="/<%= item.image%>" alt="">
+                            <p><b> <%= item.name%></b></p> <br/>
                         </div>
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
-                        </div>
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
-                        </div>
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
-                        </div>
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
-                        </div>
-                        <div class="col col-12 col-sm-6 col-lg-4 col-md-6 d-flex align-items-center">
-                            <img width="56" src="images/member.png" alt="">
-                            <h4 class="ms-3">Karbir</h4>
-                        </div>
+                       <%}%>
+                
+                        <% })%>
+
                     </div>
                 </div>
                 

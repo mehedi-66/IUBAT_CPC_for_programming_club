@@ -30,6 +30,8 @@ const user = require('./controller/user/user');
 // Admin Side
 const admin = require('./controller/admin/admin'); 
 const adminProblem = require('./controller/problem/adminProblem');
+const adminSenior = require('./controller/member/adminSeniors');
+const adminCurrentMember = require('./controller/member/adminCurrentMemeber');
 
 
 
@@ -46,6 +48,8 @@ app.use(notice);
 app.use(problem);
 app.use(admin);
 app.use(adminProblem);
+app.use(adminSenior);
+app.use(adminCurrentMember);
 app.use(home);
 
 

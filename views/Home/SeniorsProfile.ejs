@@ -92,45 +92,20 @@
       <div class="container  d-flex justify-content-around flex-sm-wrap">
        
 
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="/static/img/omi.jpg" alt="Card image cap">
+        <% data.forEach(function(item){ %>
+
+        <div class="card mt-3" style="width: 18rem; ">
+          <img class="card-img-top" style="height: 200px;" src="/<%= item.picture%>" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Ishmam Rahman Omi</h5>
-            <p><small>Software Engineer at BRAC IT</small></p>
-            <p><small>Email: Ishmam@gmail.com</small>  </p>
+            <h5 class="card-title"><%= item.name%></h5>
+            <p><small><%= item.jobStatus%></small></p>
+            <p><small><%= item.email %></small>  </p>
           </div>
         </div>
 
-        
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top"  src="/static/img/akash.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Saidur Rahman Akash</h5>
-            <p><small>Software Engineer at iBOS</small></p>
-            <p><small>Akash@gmail.com</small>  </p>
-          </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="/static/img/plabon.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Plabon Biswas</h5>
-            <p><small>Software Engineer at Orbitax</small></p>
-            <p><small>Plabon@gmail.com</small>  </p>
-          </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top overflow-hidden" src="/static/img/Dam.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Debotush Dam</h5>
-            <p><small>Software Engineer at Viasoft</small></p>
-            <p><small>Dam@gmail.com</small>  </p>
-          </div>
-        </div>
+        <% })%>
 
 
-      
 
 
           

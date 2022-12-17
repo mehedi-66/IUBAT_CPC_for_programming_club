@@ -84,38 +84,31 @@
        
         <!--Container Main start-->
         <div class="height-100 bg-light">
-           <div class="d-flex flex-row-reverse p-3 border-bottom"><a href="/adminCreate" class="btn btn-primary">Add New Problem</a>  </div>
+           <div class="d-flex flex-row-reverse p-3 border-bottom"><a href="/adminSeniorCreate" class="btn btn-primary">Add New Senior</a>  </div>
            
            <div class="w-75 p-3 mx-auto">
             <table id="example" class="table table-striped table-hover mt-5" style="width:100;" >
               <thead>
                 <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">Problem Name</th>
-                  <th scope="col">Difficulty</th>
-                  <th scope="col">Status</th>
-                 
-                  <th scope="col" class="text-center">CRUD</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Job Status</th>
+                  <th scope="col">Email</th>
                 </tr>
               </thead>
               <tbody>
                  
-               <% data.forEach(function(item){ %>
-                <tr>
-                 <td><b><%= item.pid %></b></td>
-                
-                 <td><a href="<%= Link %><%=item.pid %>"> <%= item.name %> </a></td>
-                
-                 <td><%= item.difficulties %></td>
-                
-                 <td>No</td>
-                 <td class="text-center">
-                     <a href="#" class="btn btn-primary">Edit</a>
-                     <a href="<%= Link %><%=item.pid %>" class="btn btn-success">Details</a>
-
-                 </td>
-             
-                </tr> <% }) %>
+                <% data.forEach(function(item){ %>
+                  <tr>
+                   <td><b><%= item.seniorsId %></b></td>
+                  
+                   <td><%= item.name %></td>
+                  
+                   <td><%= item.jobStatus%></td>
+                  
+                   <td><%= item.email%></td>
+               
+                  </tr> <% }) %>
              
               </tbody>
             </table>

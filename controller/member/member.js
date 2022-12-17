@@ -1,7 +1,8 @@
 const express = require('express');
 
 
-const User = require("../../model/user");
+const Seniors = require('../../model/seniors');
+const CurrentMember = require('../../model/currentMember');
 
 
 const route = express.Router();
@@ -10,18 +11,40 @@ const route = express.Router();
  
  route.use("/seniors", (req, res, next)=>{
     
+    Seniors.getAll()
+    .then(([data, fieldData]) => {
+      //console.log(data);
+
+      const page = `./Home/SeniorsProfile.ejs`
+      
+      res.render(page , {title:"IUBAT CPC Seniors",  data: data, isAuth: req.session.isAuth});
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
 
-    const page = `./Home/SeniorsProfile.ejs`
-    res.render(page , {title:"IUBAT CPC Seniors", isAuth: req.session.isAuth});
+   
+   
 }); 
 
 route.use("/member", (req, res, next)=>{
     
-
+  CurrentMember.getAll()
+  .then(([data, fieldData]) => {
+    //console.log(data);
 
     const page = `./Home/CurrentMember.ejs`
-    res.render(page , {title:"IUBAT CPC Members", isAuth: req.session.isAuth});
+    
+    res.render(page , {title:"IUBAT CPC Seniors",  data: data, isAuth: req.session.isAuth});
+    
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
 }); 
 
 
