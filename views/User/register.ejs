@@ -10,7 +10,7 @@
 
 
 </head>
-<body>
+<body style="background-color:#9F9F9F;>
 
     <div class="mx-auto">
         <nav
@@ -80,6 +80,7 @@
         </nav>
       </div>
 
+<!--     
      <div class="container mt-4" style="width: 500px;">
         
             <div class="card">
@@ -104,7 +105,63 @@
                 </div>
               </div>
          
-     </div>
+     </div> -->
+
+
+     <section class="container bg-white mt-5  pt-5 rounded">
+      <div class="pb-3 ps-3">
+          <h2 class="text-primary pt-4 pb-4">Registration</h2>
+          
+          <% if(exist == "YES"){%>
+            <p class="text-danger ml-5">This username already taken</p>
+          <%}%>
+
+          <form class="row g-3" action="/register" method="post">
+              <div class="row ml-2">
+                  <div class="col">
+                      <label for="" class="form-label">First Name</label>
+                    <input type="text" class="form-control" aria-label="First name" required>
+                  </div>
+                  <div class="col">
+                      <label for="" class="form-label">Last Name</label>
+                    <input type="text" class="form-control"  aria-label="Last name" required>
+                  </div>
+
+                  <div class="col">
+                    <label for="" class="form-label">user Name</label>
+                    <input type="text" class="form-control" name="name"  aria-label="username" required>
+                  </div>
+                </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="xyz@yahoo.com" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="inputPassword4" required>
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="inputPassword4" required>
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Phone</label>
+                <input type="number" class="form-control" id="" required>
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Mobile</label>
+                <input type="number" class="form-control" id="" required>
+              </div>
+              
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a class="ml-3" href="/login">Login</a>
+              </div>
+            </form>
+      </div>
+      <hr>
+      
+  </section>
        
    
 
