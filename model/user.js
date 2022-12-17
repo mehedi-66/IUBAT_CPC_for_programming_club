@@ -38,6 +38,11 @@ module.exports = class User{
          return data;
     }
 
+    static getAllAscending()
+    {
+        return db.execute('SELECT * FROM user ORDER BY cntac DESC');
+    }
+
     static findById(id)
     {
         // find data from database by conditions

@@ -21,7 +21,7 @@ app.use('/static',express.static(__dirname + '/static'));  // public static file
 const problem = require('./controller/problem/problem'); 
 const home = require('./controller/home/home'); 
 const member = require('./controller/member/member');
-const activites = require('./controller/activites/activites');
+const ranking = require('./controller/ranking/ranking');
 const notice = require('./controller/notice/notice');
 const user = require('./controller/user/user');
 
@@ -43,7 +43,7 @@ app.use(sessionInt());
 
 app.use(user);
 app.use(member);
-app.use(activites);
+app.use(ranking);
 app.use(notice);
 app.use(problem);
 app.use(admin);
